@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -12,7 +14,7 @@ public class Boss
 {
     private int hp = 10000;      //体力
     private int power = 25;    //攻撃力
-    private int mp = 53;       //魔法ゲージ
+    private int Mp = 53;       //魔法ゲージ
 
     //攻撃用の関数
     public void Attack()
@@ -35,28 +37,23 @@ public class Boss
         Debug.Log(magicalpoint + "mpがたまった");
     }
 
-    //mp使用量計算用
-    int Add(int mp, int magical)
-    {
-        int magi = mp - magical;
-        return magi;
-    }
 
-    //mpを消費して魔法攻撃
-    public void magicAttack(int magi)
+
+    public void Magic()
     {
-        int magg = Add(mp, 5);
-        Debug.Log("魔法攻撃をした。残りMPは" + magg);
-       
-        //mpが足りない場合
-        if(mp < 5)
+        //mpが5以上あれば消費
+        if (Mp > 5)
+        {
+            Mp -= 5;
+            Debug.Log("魔法攻撃をした。残りMPは" + Mp);
+        }
+        //足りない場合は消費できない
+        else if (Mp <= 5)
         {
             Debug.Log("MPが足りないため魔法が使えない。");
         }
 
     }
-
-
 
 
 }
@@ -95,7 +92,7 @@ public class Test : MonoBehaviour
 
 
     Boss m_lastboss = null;
-    /// <summary>
+    /// <summary> 
     /// timer変数
     /// </summary>
     float m_timer = 0;
@@ -106,9 +103,10 @@ public class Test : MonoBehaviour
 
 
 
-        // Start is called before the first frame update, use this for initialization
-        void Start()
+    // Start is called before the first frame update, use this for initialization
+    void Start()
     {
+    
         //コンソール内にHello, worldと表示
         Debug.Log("Hello,world");
 
@@ -230,7 +228,15 @@ public class Test : MonoBehaviour
             //防御用の関数を呼び出す
             lastboss.Defence(3);
 
+            for (int i = 0; i < 11; i++)
+            {
+                lastboss.Magic();
+            }
+
         }
+
+
+
 
 
 
@@ -255,21 +261,11 @@ public class Test : MonoBehaviour
             middleboss.Attack();
             //防御用
             middleboss.Defence(8);
-            middleboss.magicAttack(5);
-        }
-            
-            //魔法攻撃を10回繰り返す。
-            for(int mp =0; mp < 10; mp++)
-        {
-            Debug.Log("魔法攻撃をした。");
 
-            //mpが切れた後の処理
-            if(mp < 1)
-            {
-                Debug.Log("mpが足りない");
-
-            }
         }
+
+
+
         {
             //練習
 
@@ -287,12 +283,15 @@ public class Test : MonoBehaviour
             }
         }
 
-
-}
+    }
+    
+    
+　
 
     // Update is called once per frame
     void Update()
     {
 
     }
+
 }
