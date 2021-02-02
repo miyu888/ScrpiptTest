@@ -39,7 +39,7 @@ public class Boss
             Debug.Log("魔法攻撃をした。残りMPは" + Mp);
         }
         //足りない場合は消費できない
-        else if (Mp <= 5)
+        else if (Mp < 5)
         {
             Debug.Log("MPが足りないため魔法が使えない。");
         }
