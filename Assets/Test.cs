@@ -1,10 +1,7 @@
-﻿
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Timers;
 
 
 
@@ -30,12 +27,6 @@ public class Boss
         this.hp -= damage;
     }
 
-    //mpの関数
-    public void magic(int magicalpoint)
-    {
-        //mpを30秒ごとにためる
-        Debug.Log(magicalpoint + "mpがたまった");
-    }
 
 
 
@@ -90,16 +81,6 @@ public class Test : MonoBehaviour
         return d1;
     }
 
-
-    Boss m_lastboss = null;
-    /// <summary> 
-    /// timer変数
-    /// </summary>
-    float m_timer = 0;
-    /// <summary>
-    /// チャージタイム
-    /// </summary>
-    float m_chargeTime = 30f;
 
 
 
@@ -236,22 +217,6 @@ public class Test : MonoBehaviour
         }
 
 
-
-
-
-
-        m_timer += Time.deltaTime;
-
-        if (m_timer > m_chargeTime)
-        {
-            m_timer = 0;
-            m_lastboss.magic(1);
-        }
-
-
-        {
-            m_lastboss = new Boss();
-        }
 
         {
             //Middle Boss を宣言
